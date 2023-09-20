@@ -1,0 +1,43 @@
+[
+  {
+    "id": 81,
+    "name": "808 Harem",
+    "url": "/launchpad/samples/default/[AOM] Harem.wav"
+  },
+  {
+    "id": 82,
+    "name": "Marlow Kick",
+    "url": "/launchpad/samples/default/[AOM] Slava Marlow Kick.wav"
+  },
+  {
+    "id": 72,
+    "name": "Aver OHat",
+    "url": "/launchpad/samples/default/[AOM] Aver OHat.wav"
+  },
+  {
+    "id": 62,
+    "name": "Derevnya HiHat",
+    "url": "/launchpad/samples/default/[AOM] Derevnya HiHat.wav"
+  },
+
+  {
+    "id": 52,
+    "name": "Marlow Clap",
+    "url": "/launchpad/samples/default/[AOM] Slava Marlow Clap.wav"
+  },
+  {
+    "id": 86,
+    "name": "MC Fx",
+    "url": "/launchpad/samples/default/[AOM] MC Fx.wav"
+  },
+  {
+    "id": 87,
+    "name": "Rihanna Work",
+    "url": "/launchpad/samples/default/[AOM] Rihanna Work.wav"
+  },
+  {
+    "id": 77,
+    "name": "Marlow Tag",
+    "url": "/launchpad/samples/default/[AOM] Slava Marlow Tag.wav"
+  }
+]

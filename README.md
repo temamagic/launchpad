@@ -36,3 +36,16 @@ Or, if you want to use it itself:
 - [ ] Some another features
 - [ ] Refactor code, maybe rewrite it on angular/react/vue etc?
 - [ ] Support for another launchpads(i have only mini mk3, so i can't test it on another launchpads)
+
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+### Commit messages
+I prefer to use [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/), and i will be very happy if you will use it too
+
+
+## License
+[GPLv3](https://choosealicense.com/licenses/gpl-3.0/)
+
+## Contacts
+- [Telegram](https://t.me/temamagic)

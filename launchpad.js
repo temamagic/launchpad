@@ -472,7 +472,7 @@ async function LoadSamples() {
     await fetchData(sampleValue).then((sampleData) => {
         sampleData.forEach(function (sample) {
             let targetCell = tdNodesMap.get(sample.id.toString());
-            if (targetCell) {
+            if (targetCell && sample.url !== '') {
                 targetCell.setAttribute('data-url', sample.url);
                 targetCell.setAttribute('data-action', 'play');
                 targetCell.textContent = sample.id + ' ' + sample.name;

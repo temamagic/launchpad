@@ -25,3 +25,14 @@ Or, if you want to use it itself:
 2. Add youre own samples to the `samples` folder (read readme in the folder)
 3. ???
 4. PROFIT
+
+## Tested on
+- Launchpad Mini MK3
+
+## TODO
+- [ ] Better UI
+- [ ] Sound loop
+- [ ] Mute buttons?
+- [ ] Some another features
+- [ ] Refactor code, maybe rewrite it on angular/react/vue etc?
+- [ ] Support for another launchpads(i have only mini mk3, so i can't test it on another launchpads)

@@ -33,6 +33,7 @@ Or, if you want to use it itself:
 - [ ] Better UI
 - [ ] Sound loop
 - [ ] Mute buttons?
+- [x] Record mic
 - [ ] Some another features
 - [ ] Refactor code, maybe rewrite it on angular/react/vue etc?
 - [ ] Support for another launchpads(i have only mini mk3, so i can't test it on another launchpads)

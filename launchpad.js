@@ -334,7 +334,6 @@ function Play(file, noteNumber) {
         let targetCell = tdNodesMap.get(noteNumber.toString());
         padsColors[noteNumber] = targetCell.style.backgroundColor;
         SetColor(noteNumber, padColorCyan, padChannelPulse);
-        let targetCell = tdNodesMap.get(noteNumber.toString());
         targetCell.classList.add('pulsating-cyan');
     }
 }

@@ -45,6 +45,7 @@ let colorMap = {
 
 const selectElement = document.getElementById("sampleSelect");
 const closeButton = document.getElementById("close-button");
+const recordToggle = document.getElementById("record-toggle");
 const centeredBox = document.querySelector(".centered-box");
 const overlay = document.querySelector(".overlay");
 
@@ -164,10 +165,9 @@ if (navigator.requestMIDIAccess) {
                 let velocity = event.data[2]; // 127 pressed, 0 released
                 // console.log(type, noteNumber, velocity);
 
+                console.log(noteNumber, velocity);
+                let td = tdNodesMap.get(noteNumber.toString());
                 if (velocity > 0) {
-                    console.log(noteNumber);
-
-                    let td = tdNodesMap.get(noteNumber.toString());
                     if (td) {
                         switch (type) {
                             case 176:
@@ -177,6 +177,19 @@ if (navigator.requestMIDIAccess) {
                             case 144:
                                 // pad button
                                 Trigger(noteNumber);
+                                break;
+                        }
+                    }
+                } else {
+                    if (td) {
+                        switch (type) {
+                            case 176:
+                                // control button
+                                // TriggerRelease(noteNumber);
+                                break;
+                            case 144:
+                                // pad button
+                                TriggerRelease(noteNumber);
                                 break;
                         }
                     }
@@ -201,12 +214,83 @@ function Trigger(id) {
             Play(td.getAttribute('data-url'), id);
             break;
         case 'empty':
-            WrongButton(id);
+            if (recordToggle.checked) {
+                if (recording) {
+                    mediaRecorder.stop();
+                    recording = false;
+                } else {
+                    mediaRecorder.start();
+                    recording = true;
+                    recordingID = id;
+                    SetColor(id, padColorRed, padChannelPulse);
+                    startTime = new Date().getTime();
+                    td.textContent = id + ' ' + 'Recording...';
+                }
+            }else{
+                WrongButton(id);
+            }
             break;
         case 'stop':
             StopAll();
             break;
     }
+}
+
+function TriggerRelease(id) {
+    let td = tdNodesMap.get(id.toString());
+    let dataAction = td.getAttribute('data-action');
+    switch (dataAction) {
+        case 'empty':
+            if (mediaRecorder && mediaRecorder.state === 'recording') {
+                mediaRecorder.stop();
+                recording = false;
+            }
+            break;
+    }
+}
+
+
+// Set up the AudioContext.
+const audioCtx = new AudioContext();
+
+// Top-level variable keeps track of whether we are recording or not.
+let recording = false;
+let recordingID = 0;
+let mediaRecorder = null;
+let startTime = 0;
+// Ask user for access to the microphone.
+if (navigator.mediaDevices) {
+    navigator.mediaDevices.getUserMedia({"audio": true}).then((stream) => {
+        // Instantiate the media recorder.
+        mediaRecorder = new MediaRecorder(stream);
+        // Create a buffer to store the incoming data.
+        let chunks = [];
+        mediaRecorder.ondataavailable = (event) => {
+            chunks.push(event.data);
+        }
+        // When you stop the recorder, create a empty audio clip.
+        mediaRecorder.onstop = (event) => {
+            const blob = new Blob(chunks, {"type": "audio/ogg; codecs=opus"});
+            const audioUrl = URL.createObjectURL(blob);
+
+            // detect seconds to variable
+            let seconds = Math.floor((new Date().getTime() - startTime) / 1000);
+
+            let td = tdNodesMap.get(recordingID.toString());
+            td.setAttribute('data-url', audioUrl);
+            td.setAttribute('data-action', 'play');
+            td.textContent = recordingID + ' ' + 'Rec: ' + seconds + 's';
+            SetColor(recordingID, padColorOrange);
+            // Clear the `chunks` buffer so that you can record again.
+            chunks = [];
+        };
+    }).catch((err) => {
+        // Throw alert when the browser is unable to access the microphone.
+        alert("Oh no! Your browser cannot access your computer's microphone.");
+    });
+} else {
+    // Throw alert when the browser cannot access any media devices.
+    alert("Oh no! Your browser cannot access your computer's microphone. Please update your browser.");
 }
 
 function Play(file, noteNumber) {

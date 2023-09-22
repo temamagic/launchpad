@@ -8,6 +8,7 @@ let targetMidiDevice = null;
 
 let midi = null; // Global MIDIAccess object
 let audios = {}; // Object for storing id => audio bindings
+let padsColors = {}; // Object for storing id => color bindings
 
 // Colors
 let padColorRed = 72;
@@ -36,7 +37,7 @@ let colorMap = {
     [padColorBlue]: 'blue',
     [padColorPink]: 'pink',
     [padColorYellow]: 'yellow',
-    [padColorCyan]: '#61e9ff',
+    [padColorCyan]: 'cyan',
     [padColorOrange]: 'orange',
     [padColorGray]: 'gray',
 };
@@ -246,7 +247,8 @@ function Play(file, noteNumber) {
                     WrongButton(noteNumber);
                 });
         }
-
+        let targetCell = tdNodesMap.get(noteNumber.toString());
+        padsColors[noteNumber] = targetCell.style.backgroundColor;
         SetColor(noteNumber, padColorCyan, padChannelPulse);
         let targetCell = tdNodesMap.get(noteNumber.toString());
         targetCell.classList.add('pulsating-cyan');
@@ -298,7 +300,12 @@ function StopAll() {
         if (disableButtons[0].checked) {
             SetColor(noteNumber, padColorGray);
         } else {
-            SetColor(noteNumber, padColorOrange);
+            let previousColorPad = findKeyByValue(padsColors[noteNumber], colorMap);
+            if (previousColorPad) {
+                SetColor(noteNumber, previousColorPad);
+            } else {
+                SetColor(noteNumber, padColorOrange);
+            }
         }
     }
 }
@@ -310,7 +317,12 @@ function audioEndedHandler(noteNumber) {
     if (disableButtons[0].checked) {
         SetColor(noteNumber, padColorGray);
     } else {
-        SetColor(noteNumber, padColorOrange);
+        let previousColorPad = findKeyByValue(padsColors[noteNumber], colorMap);
+        if (previousColorPad) {
+            SetColor(noteNumber, previousColorPad);
+        } else {
+            SetColor(noteNumber, padColorOrange);
+        }
     }
 
     // Remove noteNumber from array noteNumbers

@@ -2,17 +2,20 @@
   {
     "id": 81,
     "name": "808",
-    "url": "/launchpad/samples/default/808.mp3"
+    "url": "/launchpad/samples/default/808.mp3",
+    "color": "green"
   },
   {
     "id": 82,
     "name": "Kick",
-    "url": "/launchpad/samples/default/kick.mp3"
+    "url": "/launchpad/samples/default/kick.mp3",
+    "color": "yellow"
   },
   {
     "id": 83,
     "name": "Aver OHat",
-    "url": "/launchpad/samples/default/hat.mp3"
+    "url": "/launchpad/samples/default/hat.mp3",
+    "color": "red"
   },
   {
     "id": 73,

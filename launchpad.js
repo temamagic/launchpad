@@ -476,7 +476,12 @@ async function LoadSamples() {
                 targetCell.setAttribute('data-url', sample.url);
                 targetCell.setAttribute('data-action', 'play');
                 targetCell.textContent = sample.id + ' ' + sample.name;
-                SetColor(sample.id, padColorOrange);
+                if (sample.color) {
+                    let padColor = findKeyByValue(sample.color, colorMap);
+                    SetColor(sample.id, padColor);
+                } else {
+                    SetColor(sample.id, padColorOrange);
+                }
             }
             // console.log(`ID: ${sample.id}, Name: ${sample.name}, URL: ${sample.url}`);
         });

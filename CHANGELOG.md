@@ -1,11 +1,12 @@
 
 <a name="0.1.0"></a>
-## [0.1.0](https://gitlab.com/forgebots/team/golang-edu-bot/compare/v0.0.1...0.1.0)
+## [0.1.0](https://gitlab.com/temamagic/launchpad/compare/v0.0.1...0.1.0)
 
 > 2023-09-22
 
 ### Chore
 
+* add autogen autotag & changelog, make 
 * update readme 
 * update readme 
 * added mp3s for example (I hope they don't violate anyone's rights as an example) 

@@ -226,7 +226,7 @@ function Trigger(id) {
                     startTime = new Date().getTime();
                     td.textContent = id + ' ' + 'Recording...';
                 }
-            }else{
+            } else {
                 WrongButton(id);
             }
             break;
@@ -332,7 +332,9 @@ function Play(file, noteNumber) {
                 });
         }
         let targetCell = tdNodesMap.get(noteNumber.toString());
-        padsColors[noteNumber] = targetCell.style.backgroundColor;
+        if (!padsColors[noteNumber]) {
+            padsColors[noteNumber] = targetCell.style.backgroundColor;
+        }
         SetColor(noteNumber, padColorCyan, padChannelPulse);
         targetCell.classList.add('pulsating-cyan');
     }

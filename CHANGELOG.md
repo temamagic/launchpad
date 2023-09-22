@@ -1,11 +1,26 @@
 
-<a name="0.1.0"></a>
-## [0.1.0](https://gitlab.com/temamagic/launchpad/compare/v0.0.1...0.1.0)
+<a name="0.2.0"></a>
+## [0.2.0](https://gitlab.com/temamagic/launchpad/compare/v0.1.0...0.2.0)
+
+> 2023-09-23
+
+### Feat
+
+* preload audio samples to pads 
+
+### Fix
+
+* remember color only when first play (avoid cyan remember when playing already) 
+
+
+<a name="v0.1.0"></a>
+## [v0.1.0](https://gitlab.com/temamagic/launchpad/compare/v0.0.1...v0.1.0)
 
 > 2023-09-22
 
 ### Chore
 
+* CHANGELOG.md update 0.1.0 
 * add autogen autotag & changelog, make 
 * update readme 
 * update readme 

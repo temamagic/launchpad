@@ -46,6 +46,7 @@ let colorMap = {
 const selectElement = document.getElementById("sampleSelect");
 const closeButton = document.getElementById("close-button");
 const recordToggle = document.getElementById("record-toggle");
+const preloadSamplesToggle = document.getElementById("preload-samples-toggle");
 const centeredBox = document.querySelector(".centered-box");
 const overlay = document.querySelector(".overlay");
 
@@ -566,26 +567,68 @@ async function LoadSamples() {
 
     ShowOverlay();
 
-    await fetchData(sampleValue).then((sampleData) => {
-        sampleData.forEach(function (sample) {
-            let targetCell = tdNodesMap.get(sample.id.toString());
-            if (targetCell && sample.url !== '') {
-                targetCell.setAttribute('data-url', sample.url);
-                targetCell.setAttribute('data-action', 'play');
-                targetCell.textContent = sample.id + ' ' + sample.name;
-                if (sample.color) {
-                    let padColor = findKeyByValue(sample.color, colorMap);
-                    SetColor(sample.id, padColor);
-                } else {
-                    SetColor(sample.id, padColorOrange);
-                }
+    // we preload audio content, thus eliminating the delay in downloading when clicked
+
+    const sampleData = await fetchData(sampleValue);
+    const base64Results = await prepareSamples(sampleData);
+
+    base64Results.forEach(({sample, urlData}) => {
+        let targetCell = tdNodesMap.get(sample.id.toString());
+        if (targetCell && urlData !== null) {
+            targetCell.setAttribute('data-url', urlData);
+            targetCell.setAttribute('data-action', 'play');
+            targetCell.textContent = sample.id + ' ' + sample.name;
+            if (sample.color) {
+                let padColor = findKeyByValue(sample.color, colorMap);
+                SetColor(sample.id, padColor);
+            } else {
+                SetColor(sample.id, padColorOrange);
             }
-            // console.log(`ID: ${sample.id}, Name: ${sample.name}, URL: ${sample.url}`);
-        });
-    }).catch((error) => {
-        console.error('Error on fetch data:', error);
+        }
     });
     // fake await for testing
     // await new Promise(resolve => setTimeout(resolve, 5000));
     HideOverlay();
+}
+
+async function prepareSamples(samples) {
+    const base64Promises = samples.map(async (sample) => {
+        try {
+            // detect mime type
+            let mimeType = 'audio/ogg';
+            const fileExtension = sample.url.split('.').pop().toLowerCase();
+            switch (fileExtension) {
+                case 'wav':
+                    mimeType = 'audio/wav';
+                    break;
+                case 'mp3':
+                    mimeType = 'audio/mpeg';
+                    break;
+            }
+            let urlData = sample.url;
+
+            if (preloadSamplesToggle.checked) {
+                const response = await fetch(sample.url);
+                if (!response.ok) {
+                    throw new Error('Error on fetch data');
+                }
+                const arrayBuffer = await response.arrayBuffer();
+                let base64Data = arrayBufferToBase64(arrayBuffer);
+                urlData = `data:${mimeType};base64,${base64Data}`;
+            }
+            return {sample, urlData: urlData};
+        } catch (error) {
+            console.error('Error on fetch data:', error);
+            return {sample, urlData: null};
+        }
+    });
+
+    return await Promise.all(base64Promises);
+}
+
+function arrayBufferToBase64(buffer, url) {
+    let binary = '';
+    const bytes = [].slice.call(new Uint8Array(buffer));
+    bytes.forEach((b) => binary += String.fromCharCode(b));
+    return window.btoa(binary);
 }

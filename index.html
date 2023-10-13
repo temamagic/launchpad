@@ -5,165 +5,357 @@
     <meta name="viewport" content="initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Launchpad</title>
-    <link rel="stylesheet" href="./launchpad.css">
+        <link rel="stylesheet" href="./launchpad.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 <body>
-<div class="container">
-    <div class="overlay" style="display: none"></div>
-    <div class="container-row">
-        <div class="container-column">
-            <div>Note: You can use drag n drop on pads to change samples</div>
-            <div id="status">Check device status...</div>
-        </div>
+<div class="overlay" style="display: none">
+    <div class="centered-box" style="display: none">
+        <div class="close-button" id="close-button">&#10006;</div>
+        Loading...
     </div>
-    <div class="container-row">
-        <div class="container-column">
-            <div class="centered-box" style="display: none">
-                <div class="close-button" id="close-button">&#10006;</div>
-                Loading...
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Launchpad</h1>
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Info</h3>
+                </div>
+                <div class="panel-body">
+                    <div>Note: You can use drag n drop on pads to change samples</div>
+                    <div id="status">Check device status...</div>
+                </div>
             </div>
-            <table id="board" style="background: black">
-                <tr>
-                    <td class="color" data-id="91" data-action="up" data-drop="true" data-btn="up" style="background-color: gray;">▲</td>
-                    <td class="color" data-id="92" data-action="down" data-drop="true" data-btn="down" style="background-color: gray;">▼</td>
-                    <td class="color" data-id="93" data-action="left" data-drop="true" data-btn="left" style="background-color: gray;">◀</td>
-                    <td class="color" data-id="94" data-action="right" data-drop="true" data-btn="right" style="background-color: gray;">▶</td>
-                    <td class="color" data-id="95" data-action="empty" data-drop="false" style="background-color: lightgreen;">Session</td>
-                    <td class="color" data-id="96" data-action="empty" data-drop="false" style="background: whitesmoke">Drums</td>
-                    <td class="color" data-id="97" data-action="empty" data-drop="false" style="background: whitesmoke">Keys</td>
-                    <td class="color" data-id="98" data-action="empty" data-drop="false" style="background: whitesmoke">User</td>
-                    <td class="color pulsating-cyan" data-id="99" data-action="empty" data-drop="false" style="background-color: gray;"></td>
-                </tr>
-                <tr>
-                    <td class="color" data-id="81" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">81</td>
-                    <td class="color" data-id="82" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">82</td>
-                    <td class="color" data-id="83" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">83</td>
-                    <td class="color" data-id="84" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">84</td>
-                    <td class="color" data-id="85" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">85</td>
-                    <td class="color" data-id="86" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">86</td>
-                    <td class="color" data-id="87" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">87</td>
-                    <td class="color" data-id="88" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">88</td>
-                    <td class="color" data-id="89" data-action="rowcolor" data-drop="true" data-btn="pad" style="background-color: gray;">▶</td>
-                </tr>
-                <tr>
-                    <td class="color" data-id="71" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">71</td>
-                    <td class="color" data-id="72" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">72</td>
-                    <td class="color" data-id="73" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">73</td>
-                    <td class="color" data-id="74" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">74</td>
-                    <td class="color" data-id="75" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">75</td>
-                    <td class="color" data-id="76" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">76</td>
-                    <td class="color" data-id="77" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">77</td>
-                    <td class="color" data-id="78" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">78</td>
-                    <td class="color" data-id="79" data-action="rowcolor" data-drop="true" data-btn="pad" style="background-color: gray;">▶</td>
-                </tr>
-                <tr>
-                    <td class="color" data-id="61" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">61</td>
-                    <td class="color" data-id="62" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">62</td>
-                    <td class="color" data-id="63" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">63</td>
-                    <td class="color" data-id="64" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">64</td>
-                    <td class="color" data-id="65" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">65</td>
-                    <td class="color" data-id="66" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">66</td>
-                    <td class="color" data-id="67" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">67</td>
-                    <td class="color" data-id="68" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">68</td>
-                    <td class="color" data-id="69" data-action="rowcolor" data-drop="true" data-btn="pad" style="background-color: gray;">▶</td>
-                </tr>
-                <tr>
-                    <td class="color" data-id="51" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">51</td>
-                    <td class="color" data-id="52" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">52</td>
-                    <td class="color" data-id="53" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">53</td>
-                    <td class="color" data-id="54" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">54</td>
-                    <td class="color" data-id="55" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">55</td>
-                    <td class="color" data-id="56" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">56</td>
-                    <td class="color" data-id="57" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">57</td>
-                    <td class="color" data-id="58" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">58</td>
-                    <td class="color" data-id="59" data-action="rowcolor" data-drop="true" data-btn="pad" style="background-color: gray;">▶</td>
-                </tr>
-                <tr>
-                    <td class="color" data-id="41" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">41</td>
-                    <td class="color" data-id="42" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">42</td>
-                    <td class="color" data-id="43" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">43</td>
-                    <td class="color" data-id="44" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">44</td>
-                    <td class="color" data-id="45" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">45</td>
-                    <td class="color" data-id="46" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">46</td>
-                    <td class="color" data-id="47" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">47</td>
-                    <td class="color" data-id="48" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">48</td>
-                    <td class="color" data-id="49" data-action="rowcolor" data-drop="true" data-btn="pad" style="background-color: gray;">▶</td>
-                </tr>
-                <tr>
-                    <td class="color" data-id="31" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">31</td>
-                    <td class="color" data-id="32" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">32</td>
-                    <td class="color" data-id="33" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">33</td>
-                    <td class="color" data-id="34" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">34</td>
-                    <td class="color" data-id="35" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">35</td>
-                    <td class="color" data-id="36" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">36</td>
-                    <td class="color" data-id="37" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">37</td>
-                    <td class="color" data-id="38" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">38</td>
-                    <td class="color" data-id="39" data-action="rowcolor" data-drop="true" data-btn="pad" style="background-color: gray;">▶</td>
-                </tr>
-                <tr>
-                    <td class="color" data-id="21" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">21</td>
-                    <td class="color" data-id="22" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">22</td>
-                    <td class="color" data-id="23" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">23</td>
-                    <td class="color" data-id="24" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">24</td>
-                    <td class="color" data-id="25" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">25</td>
-                    <td class="color" data-id="26" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">26</td>
-                    <td class="color" data-id="27" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">27</td>
-                    <td class="color" data-id="28" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">28</td>
-                    <td class="color" data-id="29" data-action="rowcolor" data-drop="true" data-btn="pad" style="background-color: gray;">▶</td>
-                </tr>
-                <tr>
-                    <td class="color" data-id="11" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">11</td>
-                    <td class="color" data-id="12" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">12</td>
-                    <td class="color" data-id="13" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">13</td>
-                    <td class="color" data-id="14" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">14</td>
-                    <td class="color" data-id="15" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">15</td>
-                    <td class="color" data-id="16" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">16</td>
-                    <td class="color" data-id="17" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">17</td>
-                    <td class="color" data-id="18" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">18</td>
-                    <td class="color" data-id="19" data-action="stop" style="background-color: gray;">Stop all</td>
-                </tr>
-            </table>
-        </div>
-        <div class="container-column">
-            <table class="table-controls" id="controls">
-                <tr>
-                    <td>Select sample</td>
-                    <td>
-                        <select id="sampleSelect">
-                            <option value="./samples/default.json" selected>Default</option>
-                            <option value="no_selection">Empty table</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Preload samples audio</td>
-                    <td class="td-checkbox"><input type="checkbox" id="preload-samples-toggle" checked></td>
-                </tr>
-                <tr>
-                    <td>Play async</td>
-                    <td><input type="checkbox" id="play-async" checked></td>
-                </tr>
-                <tr>
-                    <td>Disable buttons highlight after pressed</td>
-                    <td class="td-checkbox"><input type="checkbox" id="disable-buttons"></td>
-                </tr>
-                <tr>
-                    <td>Enable record mic on empty pads <br>on launchpad - press to record, release to stop<br>in browser - press to start & stop</td>
-                    <td class="td-checkbox"><input type="checkbox" id="record-toggle"></td>
-                </tr>
-
-
-            </table>
         </div>
     </div>
-    <div class="container-row">
-        <div class="container-row">
-            <div id="github">
-                <a href="https://github.com/temamagic/launchpad" target="_blank">GitHub</a>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-8 float-left">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <table class="launchpad" id="board" style="background: black">
+                            <tr>
+                                <td class="color" data-id="91" data-action="up" data-drop="true" data-btn="up" style="background-color: gray;">▲</td>
+                                <td class="color" data-id="92" data-action="down" data-drop="true" data-btn="down" style="background-color: gray;">▼
+                                </td>
+                                <td class="color" data-id="93" data-action="left" data-drop="true" data-btn="left" style="background-color: gray;">◀
+                                </td>
+                                <td class="color" data-id="94" data-action="right" data-drop="true" data-btn="right" style="background-color: gray;">
+                                    ▶
+                                </td>
+                                <td class="color" data-id="95" data-action="empty" data-drop="false" style="background-color: lightgreen;">Session
+                                </td>
+                                <td class="color" data-id="96" data-action="empty" data-drop="false" style="background: whitesmoke">Drums</td>
+                                <td class="color" data-id="97" data-action="empty" data-drop="false" style="background: whitesmoke">Keys</td>
+                                <td class="color" data-id="98" data-action="empty" data-drop="false" style="background: whitesmoke">User</td>
+                                <td class="color pulsating-cyan" data-id="99" data-action="empty" data-drop="false"
+                                    style="background-color: gray;"></td>
+                            </tr>
+                            <tr>
+                                <td class="color" data-id="81" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    81
+                                </td>
+                                <td class="color" data-id="82" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    82
+                                </td>
+                                <td class="color" data-id="83" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    83
+                                </td>
+                                <td class="color" data-id="84" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    84
+                                </td>
+                                <td class="color" data-id="85" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    85
+                                </td>
+                                <td class="color" data-id="86" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    86
+                                </td>
+                                <td class="color" data-id="87" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    87
+                                </td>
+                                <td class="color" data-id="88" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    88
+                                </td>
+                                <td class="color" data-id="89" data-action="rowcolor" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    ▶
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="color" data-id="71" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    71
+                                </td>
+                                <td class="color" data-id="72" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    72
+                                </td>
+                                <td class="color" data-id="73" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    73
+                                </td>
+                                <td class="color" data-id="74" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    74
+                                </td>
+                                <td class="color" data-id="75" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    75
+                                </td>
+                                <td class="color" data-id="76" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    76
+                                </td>
+                                <td class="color" data-id="77" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    77
+                                </td>
+                                <td class="color" data-id="78" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    78
+                                </td>
+                                <td class="color" data-id="79" data-action="rowcolor" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    ▶
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="color" data-id="61" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    61
+                                </td>
+                                <td class="color" data-id="62" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    62
+                                </td>
+                                <td class="color" data-id="63" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    63
+                                </td>
+                                <td class="color" data-id="64" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    64
+                                </td>
+                                <td class="color" data-id="65" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    65
+                                </td>
+                                <td class="color" data-id="66" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    66
+                                </td>
+                                <td class="color" data-id="67" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    67
+                                </td>
+                                <td class="color" data-id="68" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    68
+                                </td>
+                                <td class="color" data-id="69" data-action="rowcolor" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    ▶
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="color" data-id="51" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    51
+                                </td>
+                                <td class="color" data-id="52" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    52
+                                </td>
+                                <td class="color" data-id="53" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    53
+                                </td>
+                                <td class="color" data-id="54" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    54
+                                </td>
+                                <td class="color" data-id="55" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    55
+                                </td>
+                                <td class="color" data-id="56" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    56
+                                </td>
+                                <td class="color" data-id="57" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    57
+                                </td>
+                                <td class="color" data-id="58" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    58
+                                </td>
+                                <td class="color" data-id="59" data-action="rowcolor" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    ▶
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="color" data-id="41" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    41
+                                </td>
+                                <td class="color" data-id="42" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    42
+                                </td>
+                                <td class="color" data-id="43" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    43
+                                </td>
+                                <td class="color" data-id="44" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    44
+                                </td>
+                                <td class="color" data-id="45" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    45
+                                </td>
+                                <td class="color" data-id="46" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    46
+                                </td>
+                                <td class="color" data-id="47" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    47
+                                </td>
+                                <td class="color" data-id="48" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    48
+                                </td>
+                                <td class="color" data-id="49" data-action="rowcolor" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    ▶
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="color" data-id="31" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    31
+                                </td>
+                                <td class="color" data-id="32" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    32
+                                </td>
+                                <td class="color" data-id="33" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    33
+                                </td>
+                                <td class="color" data-id="34" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    34
+                                </td>
+                                <td class="color" data-id="35" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    35
+                                </td>
+                                <td class="color" data-id="36" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    36
+                                </td>
+                                <td class="color" data-id="37" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    37
+                                </td>
+                                <td class="color" data-id="38" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    38
+                                </td>
+                                <td class="color" data-id="39" data-action="rowcolor" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    ▶
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="color" data-id="21" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    21
+                                </td>
+                                <td class="color" data-id="22" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    22
+                                </td>
+                                <td class="color" data-id="23" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    23
+                                </td>
+                                <td class="color" data-id="24" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    24
+                                </td>
+                                <td class="color" data-id="25" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    25
+                                </td>
+                                <td class="color" data-id="26" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    26
+                                </td>
+                                <td class="color" data-id="27" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    27
+                                </td>
+                                <td class="color" data-id="28" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    28
+                                </td>
+                                <td class="color" data-id="29" data-action="rowcolor" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    ▶
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="color" data-id="11" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    11
+                                </td>
+                                <td class="color" data-id="12" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    12
+                                </td>
+                                <td class="color" data-id="13" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    13
+                                </td>
+                                <td class="color" data-id="14" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    14
+                                </td>
+                                <td class="color" data-id="15" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    15
+                                </td>
+                                <td class="color" data-id="16" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    16
+                                </td>
+                                <td class="color" data-id="17" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    17
+                                </td>
+                                <td class="color" data-id="18" data-action="empty" data-drop="true" data-btn="pad" style="background-color: gray;">
+                                    18
+                                </td>
+                                <td class="color" data-id="19" data-action="stop" style="background-color: gray;">Stop all</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 loat-right">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Settings</h3>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table-controls" id="controls">
+                            <tr>
+                                <td>Select sample</td>
+                                <td>
+                                    <select id="sampleSelect">
+                                        <option value="./samples/default.json" selected>Default</option>
+                                        <option value="no_selection">Empty table</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Preload samples audio</td>
+                                <td class="td-checkbox"><input type="checkbox" id="preload-samples-toggle" checked></td>
+                            </tr>
+                            <tr>
+                                <td>Play async</td>
+                                <td><input type="checkbox" id="play-async" checked></td>
+                            </tr>
+                            <tr>
+                                <td>Disable buttons highlight after pressed</td>
+                                <td class="td-checkbox"><input type="checkbox" id="disable-buttons"></td>
+                            </tr>
+                            <tr>
+                                <td>Mic</td>
+                                <td class="td-checkbox"><input type="checkbox" id="record-toggle"></td>
+                            </tr>
+
+
+                        </table>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <!--                        <div class="btn-group pull-right">-->
+                        <!--                            <button type="button" class="btn btn-success"></button>-->
+                        <!--                        </div>-->
+                        <div class="panel-title">
+                            <h4>Tracks
+                                <button id="record-btn" type="button" class="btn btn-success">
+                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                </button>
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <canvas class="visualizer"></canvas>
+                        <div class="recording"></div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
 </div>
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted">
+            <a href="https://github.com/temamagic/launchpad" target="_blank">Support on GitHub</a>
+        </p>
+    </div>
+</footer>
 <script src="./launchpad.js"></script>
 </body>
 </html>

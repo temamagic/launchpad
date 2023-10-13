@@ -14,71 +14,13 @@
     animation: pulse-cyan 1s infinite; /* 2s - animation duration, infinite - infinite execution */
 }
 
-.black-bg {
-    background-color: black;
-    color: white;
-    text-shadow: 0 0 5px white; /* Добавляем свечение по контуру */
-}
-
-.color {
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
     cursor: pointer;
-    vertical-align: center;
-    text-align: center;
-    letter-spacing: 1px;
-}
-
-.color:hover {
-    opacity: 0.9;
-}
-
-.highlight {
-    border-color: wheat;
-    border-width: 1px;
-}
-
-.highlight_wrong {
-    border-color: red;
-    border-width: 1px;
-}
-
-/* Styles for the container and tables */
-.container {
-    display: flex; /* Use a flexible container (Flexbox) */
-    flex-direction: column; /* Set the direction to vertical (columns) */
-}
-
-.container-column {
-    flex: 1; /* Distribute space evenly between columns within a row */
-    padding: 10px; /* Add spacing between columns */
-}
-
-.container-row {
-    display: flex; /* Make rows flexible containers */
-    justify-content: space-between; /* Distribute columns evenly horizontally */
-    align-items: center; /* Align content vertically centered */
-    padding: 10px; /* Add spacing between rows */
-    border-bottom: 1px solid #ccc; /* Add dividing lines between rows (optional) */
-}
-
-table {
-    /*border-collapse: collapse; !* Remove double borders between cells *!*/
-    /*border-color: black;*/
-    border-width: 1px;
-}
-
-td {
-    width: 12.5%; /* Distribute cells into 8 columns (100% / 8) */
-    height: 12.5%; /* Distribute cells into 8 rows (100% / 8) */
-    text-align: center; /* Center-align text horizontally */
-    vertical-align: middle; /* Center-align text vertically */
-    border: 1px solid #000; /* Border for cells */
-    position: relative; /* Add relative position for pseudo-element */
-}
-
-td::before {
-    content: ''; /* Fake content */
-    display: block;
-    padding-top: 40%; /* Decrease the value to reduce the size of squares */
+    font-size: 20px;
+    color: #333; /* Color for the close button */
 }
 
 .overlay {
@@ -92,19 +34,69 @@ td::before {
 }
 
 .centered-box {
-    position: relative;
-    background-color: #ffffff; /* Background color for your div */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     z-index: 2;
 }
 
-.close-button {
+.launchpad {
+    border: 1px solid black;
+}
+
+.launchpad td {
+    width: 12.5%; /* Distribute cells into 8 columns (100% / 8) */
+    height: 12.5%; /* Distribute cells into 8 rows (100% / 8) */
+    text-align: center; /* Center-align text horizontally */
+    vertical-align: middle; /* Center-align text vertically */
+    border: 1px solid #000; /* Border for cells */
+    position: relative; /* Add relative position for pseudo-element */
+}
+
+.launchpad td::before {
+    content: ''; /* Fake content */
+    display: block;
+    padding-top: 20%; /* Decrease the value to reduce the size of squares */
+    padding-bottom: 20%; /* Decrease the value to reduce the size of squares */
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+
+.footer {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-    font-size: 20px;
-    color: #333; /* Color for the close button */
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    background-color: #f5f5f5;
+}
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+.container {
+    width: auto;
+    max-width: 680px;
+    padding: 0 15px;
+}
+
+.container .text-muted {
+    margin: 20px 0;
 }

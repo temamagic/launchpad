@@ -23,6 +23,16 @@
     color: #333; /* Color for the close button */
 }
 
+.highlight {
+    border-color: wheat !important;
+    border-width: 1px !important;
+}
+
+.highlight_wrong {
+    border-color: red !important;
+    border-width: 1px !important;
+}
+
 .overlay {
     position: fixed;
     top: 0;
@@ -79,7 +89,7 @@ body {
 
 .footer {
     position: absolute;
-    bottom: 0;
+    /*bottom: 0;*/
     width: 100%;
     /* Set the fixed height of the footer here */
     height: 60px;
@@ -99,4 +109,9 @@ body {
 
 .container .text-muted {
     margin: 20px 0;
+}
+
+#visualizer {
+    width: 100%;
+    height: auto;
 }

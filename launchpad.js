@@ -45,7 +45,6 @@ let colorMap = {
 
 const selectElement = document.getElementById("sampleSelect");
 const closeButton = document.getElementById("close-button");
-const recordToggle = document.getElementById("record-toggle");
 const preloadSamplesToggle = document.getElementById("preload-samples-toggle");
 const centeredBox = document.querySelector(".centered-box");
 const overlay = document.querySelector(".overlay");
@@ -215,21 +214,7 @@ function Trigger(id) {
             Play(td.getAttribute('data-url'), id);
             break;
         case 'empty':
-            if (recordToggle.checked) {
-                if (recording) {
-                    mediaRecorder.stop();
-                    recording = false;
-                } else {
-                    mediaRecorder.start();
-                    recording = true;
-                    recordingID = id;
-                    SetColor(id, padColorRed, padChannelPulse);
-                    startTime = new Date().getTime();
-                    td.textContent = id + ' ' + 'Recording...';
-                }
-            } else {
-                WrongButton(id);
-            }
+            WrongButton(id);
             break;
         case 'stop':
             StopAll();
@@ -242,56 +227,8 @@ function TriggerRelease(id) {
     let dataAction = td.getAttribute('data-action');
     switch (dataAction) {
         case 'empty':
-            if (mediaRecorder && mediaRecorder.state === 'recording') {
-                mediaRecorder.stop();
-                recording = false;
-            }
             break;
     }
-}
-
-
-// Set up the AudioContext.
-const audioCtx = new AudioContext();
-
-// Top-level variable keeps track of whether we are recording or not.
-let recording = false;
-let recordingID = 0;
-let mediaRecorder = null;
-let startTime = 0;
-// Ask user for access to the microphone.
-if (navigator.mediaDevices) {
-    navigator.mediaDevices.getUserMedia({"audio": true}).then((stream) => {
-        // Instantiate the media recorder.
-        mediaRecorder = new MediaRecorder(stream);
-        // Create a buffer to store the incoming data.
-        let chunks = [];
-        mediaRecorder.ondataavailable = (event) => {
-            chunks.push(event.data);
-        }
-        // When you stop the recorder, create a empty audio clip.
-        mediaRecorder.onstop = (event) => {
-            const blob = new Blob(chunks, {"type": "audio/ogg; codecs=opus"});
-            const audioUrl = URL.createObjectURL(blob);
-
-            // detect seconds to variable
-            let seconds = Math.floor((new Date().getTime() - startTime) / 1000);
-
-            let td = tdNodesMap.get(recordingID.toString());
-            td.setAttribute('data-url', audioUrl);
-            td.setAttribute('data-action', 'play');
-            td.textContent = recordingID + ' ' + 'Rec: ' + seconds + 's';
-            SetColor(recordingID, padColorOrange);
-            // Clear the `chunks` buffer so that you can record again.
-            chunks = [];
-        };
-    }).catch((err) => {
-        // Throw alert when the browser is unable to access the microphone.
-        alert("Oh no! Your browser cannot access your computer's microphone.");
-    });
-} else {
-    // Throw alert when the browser cannot access any media devices.
-    alert("Oh no! Your browser cannot access your computer's microphone. Please update your browser.");
 }
 
 function Play(file, noteNumber) {
@@ -488,7 +425,34 @@ function handleDrop(dropTarget, e) {
         } else {
             alert(`File ${fileName} has wrong extension. Allowed extensions: ogg, wav, mp3`);
         }
+        return;
     }
+
+    // if not files
+    console.log(e)
+    const dataPlain = e.dataTransfer.getData('text/plain');
+    if (dataPlain) {
+        try {
+            const data = JSON.parse(dataPlain);
+            if (data) {
+                if (!data.url) {
+                    alert('This is not a sample file');
+                    return;
+                }
+
+                dropTarget.setAttribute('data-url', data.url);
+                dropTarget.setAttribute('data-action', 'play');
+                dropTargetID = dropTarget.getAttribute('data-id');
+                SetColor(dropTargetID, padColorOrange);
+                dropTarget.textContent = dropTargetID + ' ' + data.text;
+            }
+        } catch (e) {
+            // not json
+            console.log(e)
+            alert('This is not a sample file');
+        }
+    }
+
 }
 
 function findKeyByValue(value, obj) {
